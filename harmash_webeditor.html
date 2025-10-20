@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدارس الهمة العلمية الأهلية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+        
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #f97316 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #1e40af, #2563eb);
+            transform: translateY(-2px);
+        }
+        
+        .btn-orange {
+            background: linear-gradient(45deg, #ea580c, #f97316);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-orange:hover {
+            background: linear-gradient(45deg, #dc2626, #ea580c);
+            transform: translateY(-2px);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: linear-gradient(45deg, #059669, #10b981);
+        }
+        
+        .notification.error {
+            background: linear-gradient(45deg, #dc2626, #ef4444);
+        }
+        
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .table-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        .table-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-full">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+                        <span class="text-2xl font-bold text-blue-900">🎓</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold">مدارس الهمة العلمية الأهلية</h1>
+                        <p class="text-blue-100">نحو مستقبل تعليمي مشرق</p>
+                    </div>
+                </div>
+                <div class="hidden md:block text-left">
+                    <p class="text-sm">📞 04420927 | 779492227</p>
+                    <p class="text-sm">📧 alhimmaschools@</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Welcome Section -->
+        <div id="welcomeSection" class="text-center mb-12 fade-in">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">مرحباً بكم في نظام إدارة المدرسة</h2>
+            <p class="text-xl text-gray-600 mb-8">منصة رقمية شاملة لخدمة الطلاب والإدارة</p>
+            
+            <!-- Login Options -->
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Student Login Card -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="text-6xl mb-4">👨‍🎓</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">دخول الطلاب</h3>
+                    <p class="text-gray-600 mb-6">ادخل إلى صفحتك الشخصية لعرض درجاتك وبياناتك الأكاديمية</p>
+                    <button onclick="showStudentLogin()" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold w-full">
+                        تسجيل الدخول
+                    </button>
+                </div>
+                
+                <!-- Admin Login Card -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="text-6xl mb-4">👨‍💼</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">دخول الإدارة</h3>
+                    <p class="text-gray-600 mb-6">لوحة تحكم شاملة لإدارة بيانات الطلاب والنظام</p>
+                    <button onclick="showAdminLogin()" class="btn-orange text-white px-8 py-3 rounded-lg font-semibold w-full">
+                        دخول الإدارة
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Developer Credit -->
+            <div class="mt-16 text-center">
+                <p class="text-lg text-gray-600 font-semibold">إعداد وبرمجة: أ. غادة الحيدري</p>
+            </div>
+        </div>
+
+        <!-- Student Login Form -->
+        <div id="studentLoginForm" class="hidden max-w-md mx-auto bg-white rounded-xl shadow-lg p-8 fade-in">
+            <div class="text-center mb-6">
+                <div class="text-5xl mb-4">👨‍🎓</div>
+                <h3 class="text-2xl font-bold text-gray-800">دخول الطلاب</h3>
+            </div>
+            
+            <form onsubmit="studentLogin(event)">
+                <div class="mb-4">
+                    <label for="studentUsername" class="block text-gray-700 font-semibold mb-2">اسم المستخدم</label>
+                    <input type="text" id="studentUsername" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="studentPassword" class="block text-gray-700 font-semibold mb-2">كلمة المرور</label>
+                    <input type="password" id="studentPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                
+                <button type="submit" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold w-full mb-4">
+                    دخول
+                </button>
+                
+                <div class="text-center">
+                    <p class="text-sm text-gray-600 mb-2">نسيت كلمة المرور؟</p>
+                    <p class="text-sm text-blue-600">تواصل مع إدارة المدرسة على: 779492227</p>
+                </div>
+                
+                <button type="button" onclick="showWelcome()" class="text-gray-500 hover:text-gray-700 mt-4 w-full">
+                    ← العودة للصفحة الرئيسية
+                </button>
+            </form>
+        </div>
+
+        <!-- Admin Login Form -->
+        <div id="adminLoginForm" class="hidden max-w-md mx-auto bg-white rounded-xl shadow-lg p-8 fade-in">
+            <div class="text-center mb-6">
+                <div class="text-5xl mb-4">👨‍💼</div>
+                <h3 class="text-2xl font-bold text-gray-800">دخول الإدارة</h3>
+            </div>
+            
+            <form onsubmit="adminLogin(event)">
+                <div class="mb-4">
+                    <label for="adminUsername" class="block text-gray-700 font-semibold mb-2">اسم المستخدم الإداري</label>
+                    <input type="text" id="adminUsername" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="adminPassword" class="block text-gray-700 font-semibold mb-2">كلمة المرور</label>
+                    <input type="password" id="adminPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+                </div>
+                
+                <button type="submit" class="btn-orange text-white px-8 py-3 rounded-lg font-semibold w-full mb-4">
+                    دخول الإدارة
+                </button>
+                
+                <button type="button" onclick="showWelcome()" class="text-gray-500 hover:text-gray-700 mt-4 w-full">
+                    ← العودة للصفحة الرئيسية
+                </button>
+            </form>
+        </div>
+
+        <!-- Student Dashboard -->
+        <div id="studentDashboard" class="hidden fade-in">
+            <!-- Student Info Header -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <div class="flex items-center space-x-6 space-x-reverse">
+                    <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
+                        <span class="text-3xl">👨‍🎓</span>
+                    </div>
+                    <div class="flex-1">
+                        <h2 id="studentName" class="text-2xl font-bold text-gray-800 mb-2">أحمد محمد علي</h2>
+                        <p id="studentGrade" class="text-lg text-gray-600">الصف السابع الأساسي</p>
+                        <p id="studentId" class="text-sm text-gray-500">رقم الطالب: 2024001</p>
+                    </div>
+                    <button onclick="logout()" class="btn-orange text-white px-4 py-2 rounded-lg">
+                        تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+
+            <!-- Student Menu -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
+                <button onclick="showGrades()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">📊</div>
+                    <h3 class="font-bold text-gray-800">العلامات الدراسية</h3>
+                </button>
+                
+                <button onclick="showAttendance()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">📅</div>
+                    <h3 class="font-bold text-gray-800">الحضور والغياب</h3>
+                </button>
+                
+                <button onclick="showFees()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">💰</div>
+                    <h3 class="font-bold text-gray-800">الرسوم الدراسية</h3>
+                </button>
+                
+                <button onclick="showActivities()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">🎉</div>
+                    <h3 class="font-bold text-gray-800">الأنشطة</h3>
+                </button>
+                
+                <button onclick="showNotifications()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">🔔</div>
+                    <h3 class="font-bold text-gray-800">الإشعارات</h3>
+                </button>
+                
+                <button onclick="showContact()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">📞</div>
+                    <h3 class="font-bold text-gray-800">التواصل</h3>
+                </button>
+            </div>
+
+            <!-- Content Area -->
+            <div id="studentContent" class="bg-white rounded-xl shadow-lg p-6">
+                <div class="text-center py-12">
+                    <div class="text-6xl mb-4">🎓</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">مرحباً بك في صفحتك الشخصية</h3>
+                    <p class="text-gray-600">اختر من القائمة أعلاه لعرض المعلومات المطلوبة</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="adminDashboard" class="hidden fade-in">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">لوحة التحكم الإدارية</h2>
+                <button onclick="logout()" class="btn-orange text-white px-4 py-2 rounded-lg">
+                    تسجيل الخروج
+                </button>
+            </div>
+
+            <!-- Admin Menu -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
+                <button onclick="showStudentManagement()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">👥</div>
+                    <h3 class="font-bold text-gray-800">إدارة الطلاب</h3>
+                </button>
+                
+                <button onclick="showGradeManagement()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">📝</div>
+                    <h3 class="font-bold text-gray-800">إدارة العلامات</h3>
+                </button>
+                
+                <button onclick="showAttendanceManagement()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">📋</div>
+                    <h3 class="font-bold text-gray-800">إدارة الحضور</h3>
+                </button>
+                
+                <button onclick="showFeesManagement()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">💳</div>
+                    <h3 class="font-bold text-gray-800">إدارة الرسوم</h3>
+                </button>
+                
+                <button onclick="showActivityManagement()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">🎨</div>
+                    <h3 class="font-bold text-gray-800">إدارة الأنشطة</h3>
+                </button>
+                
+                <button onclick="showNotificationManagement()" class="bg-white rounded-xl shadow-lg p-6 card-hover text-center">
+                    <div class="text-4xl mb-3">📢</div>
+                    <h3 class="font-bold text-gray-800">إدارة الإشعارات</h3>
+                </button>
+            </div>
+
+            <!-- Admin Content Area -->
+            <div id="adminContent" class="bg-white rounded-xl shadow-lg p-6">
+                <div class="text-center py-12">
+                    <div class="text-6xl mb-4">⚙️</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">لوحة التحكم الإدارية</h3>
+                    <p class="text-gray-600">اختر من القائمة أعلاه لإدارة البيانات</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4">معلومات التواصل</h4>
+                    <p class="mb-2">📞 الهاتف الأرضي: 04420927</p>
+                    <p class="mb-2">📱 الهواتف: 779492227 – 714442137</p>
+                    <p class="mb-2">📧 البريد: alhimmaschools@</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-4">العنوان</h4>
+                    <p>🏫 اليمن – إب – المشنة – دار القدسي</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-4">تابعونا</h4>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#" class="text-blue-400 hover:text-blue-300">Facebook</a>
+                        <a href="#" class="text-pink-400 hover:text-pink-300">Instagram</a>
+                        <a href="#" class="text-green-400 hover:text-green-300">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2024 مدارس الهمة العلمية الأهلية - جميع الحقوق محفوظة</p>
+                <p class="mt-2 text-gray-400">إعداد وبرمجة: أ. غادة الحيدري</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data storage
+        let currentUser = null;
+        let currentUserType = null;
+        
+        // Sample students data - now editable
+        let studentsData = {
+            'student1': {
+                username: 'ahmed2024',
+                password: '123456',
+                name: 'أحمد محمد علي',
+                grade: 'الصف السابع الأساسي',
+                id: '2024001',
+                grades: {
+                    'نوفمبر': { 'القرآن': 95, 'الإسلامية': 88, 'اللغة العربية': 92, 'اللغة الإنجليزية': 85, 'الرياضيات': 90, 'العلوم': 87, 'الاجتماعيات': 89, 'الحاسوب': 94 },
+                    'ديسمبر': { 'القرآن': 93, 'الإسلامية': 90, 'اللغة العربية': 88, 'اللغة الإنجليزية': 87, 'الرياضيات': 92, 'العلوم': 89, 'الاجتماعيات': 91, 'الحاسوب': 96 },
+                    'يناير': { 'القرآن': 97, 'الإسلامية': 92, 'اللغة العربية': 90, 'اللغة الإنجليزية': 89, 'الرياضيات': 94, 'العلوم': 91, 'الاجتماعيات': 93, 'الحاسوب': 98 }
+                },
+                attendance: generateAttendanceData(),
+                fees: { total: 50000, paid: 30000, remaining: 20000 },
+                notifications: [
+                    { type: 'تنبيه', message: 'موعد الامتحان النهائي: 15 فبراير 2024', date: '2024-01-20' },
+                    { type: 'تهنئة', message: 'تهانينا لحصولك على المركز الأول في مادة الحاسوب', date: '2024-01-18' }
+                ]
+            },
+            'student2': {
+                username: 'sara2024',
+                password: '123456',
+                name: 'سارة أحمد محمد',
+                grade: 'الصف الثامن الأساسي',
+                id: '2024002',
+                grades: {
+                    'نوفمبر': { 'القرآن': 98, 'الإسلامية': 92, 'اللغة العربية': 95, 'اللغة الإنجليزية': 88, 'الرياضيات': 93, 'العلوم': 90, 'الاجتماعيات': 94, 'الحاسوب': 97 },
+                    'ديسمبر': { 'القرآن': 96, 'الإسلامية': 94, 'اللغة العربية': 93, 'اللغة الإنجليزية': 90, 'الرياضيات': 95, 'العلوم': 92, 'الاجتماعيات': 96, 'الحاسوب': 99 },
+                    'يناير': { 'القرآن': 99, 'الإسلامية': 96, 'اللغة العربية': 97, 'اللغة الإنجليزية': 92, 'الرياضيات': 97, 'العلوم': 94, 'الاجتماعيات': 98, 'الحاسوب': 100 }
+                },
+                attendance: generateAttendanceData(),
+                fees: { total: 55000, paid: 40000, remaining: 15000 },
+                notifications: [
+                    { type: 'تهنئة', message: 'تهانينا لحصولك على المركز الأول في الصف', date: '2024-01-22' }
+                ]
+            }
+        };
+        
+        // Activities data - now editable
+        let activitiesData = [
+            {
+                id: 1,
+                title: 'مسابقة الرياضيات',
+                description: 'حصلت على المركز الأول في مسابقة الرياضيات على مستوى المدرسة',
+                date: 'ديسمبر 2023',
+                icon: '🏆',
+                gradient: 'from-blue-400 to-purple-500'
+            },
+            {
+                id: 2,
+                title: 'معرض الفنون',
+                description: 'مشاركة في معرض الفنون السنوي بلوحة فنية مميزة',
+                date: 'نوفمبر 2023',
+                icon: '🎨',
+                gradient: 'from-green-400 to-blue-500'
+            },
+            {
+                id: 3,
+                title: 'بطولة كرة القدم',
+                description: 'عضو في فريق المدرسة الفائز ببطولة كرة القدم',
+                date: 'يناير 2024',
+                icon: '⚽',
+                gradient: 'from-orange-400 to-red-500'
+            },
+            {
+                id: 4,
+                title: 'مسابقة القراءة',
+                description: 'مشاركة فعالة في مسابقة القراءة الشهرية',
+                date: 'أكتوبر 2023',
+                icon: '📚',
+                gradient: 'from-purple-400 to-pink-500'
+            }
+        ];
+        
+        // Global notifications - now editable
+        let globalNotifications = [
+            { id: 1, type: 'تنبيه', message: 'موعد الامتحان النهائي: 15 فبراير 2024', date: '2024-01-20', target: 'all' },
+            { id: 2, type: 'إعلان', message: 'إجازة منتصف العام الدراسي من 1-7 فبراير', date: '2024-01-19', target: 'all' }
+        ];
+        
+        // Current editing states
+        let editingStudent = null;
+        let editingGrades = { studentId: null, month: null };
+        let selectedStudentForGrades = null;
+        let selectedMonth = 'نوفمبر';
+        
+        // Admin credentials
+        const adminCredentials = {
+            username: 'admin',
+            password: 'admin123'
+        };
+        
+        function generateAttendanceData() {
+            const attendance = {};
+            const months = ['نوفمبر', 'ديسمبر', 'يناير'];
+            months.forEach(month => {
+                attendance[month] = {};
+                for (let day = 1; day <= 30; day++) {
+                    attendance[month][day] = Math.random() > 0.1 ? 'حاضر' : 'غائب';
+                }
+            });
+            return attendance;
+        }
+        
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+        
+        function showWelcome() {
+            document.getElementById('welcomeSection').classList.remove('hidden');
+            document.getElementById('studentLoginForm').classList.add('hidden');
+            document.getElementById('adminLoginForm').classList.add('hidden');
+            document.getElementById('studentDashboard').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+        
+        function showStudentLogin() {
+            document.getElementById('welcomeSection').classList.add('hidden');
+            document.getElementById('studentLoginForm').classList.remove('hidden');
+            document.getElementById('adminLoginForm').classList.add('hidden');
+            document.getElementById('studentDashboard').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+        
+        function showAdminLogin() {
+            document.getElementById('welcomeSection').classList.add('hidden');
+            document.getElementById('studentLoginForm').classList.add('hidden');
+            document.getElementById('adminLoginForm').classList.remove('hidden');
+            document.getElementById('studentDashboard').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+        
+        function studentLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('studentUsername').value;
+            const password = document.getElementById('studentPassword').value;
+            
+            // Find student
+            const student = Object.values(studentsData).find(s => s.username === username && s.password === password);
+            
+            if (student) {
+                currentUser = student;
+                currentUserType = 'student';
+                
+                // Update student info
+                document.getElementById('studentName').textContent = student.name;
+                document.getElementById('studentGrade').textContent = student.grade;
+                document.getElementById('studentId').textContent = `رقم الطالب: ${student.id}`;
+                
+                // Show dashboard
+                document.getElementById('welcomeSection').classList.add('hidden');
+                document.getElementById('studentLoginForm').classList.add('hidden');
+                document.getElementById('studentDashboard').classList.remove('hidden');
+                
+                showNotification('تم تسجيل الدخول بنجاح');
+            } else {
+                showNotification('اسم المستخدم أو كلمة المرور غير صحيحة', 'error');
+            }
+        }
+        
+        function adminLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (username === adminCredentials.username && password === adminCredentials.password) {
+                currentUser = { username: 'admin' };
+                currentUserType = 'admin';
+                
+                // Show admin dashboard
+                document.getElementById('welcomeSection').classList.add('hidden');
+                document.getElementById('adminLoginForm').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                
+                showNotification('تم دخول الإدارة بنجاح');
+            } else {
+                showNotification('بيانات الدخول غير صحيحة', 'error');
+            }
+        }
+        
+        function logout() {
+            currentUser = null;
+            currentUserType = null;
+            showWelcome();
+            showNotification('تم تسجيل الخروج بنجاح');
+        }
+        
+        // Student Dashboard Functions
+        function showGrades() {
+            const content = document.getElementById('studentContent');
+            const grades = currentUser.grades;
+            
+            let html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">📊 العلامات الدراسية</h3>
+                </div>
+                <div class="table-container">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="bg-blue-50">
+                                <th class="border border-gray-300 px-4 py-3 text-right font-bold">المادة</th>
+                                <th class="border border-gray-300 px-4 py-3 text-center font-bold">نوفمبر</th>
+                                <th class="border border-gray-300 px-4 py-3 text-center font-bold">ديسمبر</th>
+                                <th class="border border-gray-300 px-4 py-3 text-center font-bold">يناير</th>
+                                <th class="border border-gray-300 px-4 py-3 text-center font-bold">المعدل</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            const subjects = ['القرآن', 'الإسلامية', 'اللغة العربية', 'اللغة الإنجليزية', 'الرياضيات', 'العلوم', 'الاجتماعيات', 'الحاسوب'];
+            
+            subjects.forEach(subject => {
+                const nov = grades['نوفمبر'][subject] || 0;
+                const dec = grades['ديسمبر'][subject] || 0;
+                const jan = grades['يناير'][subject] || 0;
+                const avg = Math.round((nov + dec + jan) / 3);
+                
+                html += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="border border-gray-300 px-4 py-3 font-semibold">${subject}</td>
+                        <td class="border border-gray-300 px-4 py-3 text-center">${nov}</td>
+                        <td class="border border-gray-300 px-4 py-3 text-center">${dec}</td>
+                        <td class="border border-gray-300 px-4 py-3 text-center">${jan}</td>
+                        <td class="border border-gray-300 px-4 py-3 text-center font-bold ${avg >= 90 ? 'text-green-600' : avg >= 80 ? 'text-blue-600' : avg >= 70 ? 'text-orange-600' : 'text-red-600'}">${avg}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                    <h4 class="font-bold text-blue-800 mb-2">ملاحظات:</h4>
+                    <ul class="text-sm text-blue-700 space-y-1">
+                        <li>• الدرجة الكاملة لكل مادة: 100 درجة</li>
+                        <li>• <span class="text-green-600 font-semibold">ممتاز:</span> 90-100 | <span class="text-blue-600 font-semibold">جيد جداً:</span> 80-89 | <span class="text-orange-600 font-semibold">جيد:</span> 70-79 | <span class="text-red-600 font-semibold">مقبول:</span> أقل من 70</li>
+                    </ul>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        function showAttendance() {
+            const content = document.getElementById('studentContent');
+            const attendance = currentUser.attendance;
+            
+            let html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">📅 الحضور والغياب</h3>
+                </div>
+            `;
+            
+            Object.keys(attendance).forEach(month => {
+                const monthData = attendance[month];
+                const totalDays = Object.keys(monthData).length;
+                const presentDays = Object.values(monthData).filter(status => status === 'حاضر').length;
+                const absentDays = totalDays - presentDays;
+                const attendanceRate = Math.round((presentDays / totalDays) * 100);
+                
+                html += `
+                    <div class="mb-8 p-6 border border-gray-200 rounded-lg">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-xl font-bold text-gray-800">${month}</h4>
+                            <div class="text-sm text-gray-600">
+                                <span class="text-green-600 font-semibold">حاضر: ${presentDays}</span> | 
+                                <span class="text-red-600 font-semibold">غائب: ${absentDays}</span> | 
+                                <span class="text-blue-600 font-semibold">النسبة: ${attendanceRate}%</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-2">
+                `;
+                
+                for (let day = 1; day <= 30; day++) {
+                    const status = monthData[day];
+                    const statusClass = status === 'حاضر' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+                    const statusIcon = status === 'حاضر' ? '✓' : '✗';
+                    
+                    html += `
+                        <div class="text-center p-2 rounded ${statusClass} text-xs font-semibold">
+                            <div>${day}</div>
+                            <div>${statusIcon}</div>
+                        </div>
+                    `;
+                }
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            content.innerHTML = html;
+        }
+        
+        function showFees() {
+            const content = document.getElementById('studentContent');
+            const fees = currentUser.fees;
+            const paymentRate = Math.round((fees.paid / fees.total) * 100);
+            
+            const html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">💰 الرسوم الدراسية</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-bold text-blue-800 mb-4">ملخص الرسوم</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-700">إجمالي الرسوم:</span>
+                                <span class="font-bold text-gray-800">${fees.total.toLocaleString()} ريال</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-700">المبلغ المدفوع:</span>
+                                <span class="font-bold text-green-600">${fees.paid.toLocaleString()} ريال</span>
+                            </div>
+                            <div class="flex justify-between border-t pt-3">
+                                <span class="text-gray-700">المبلغ المتبقي:</span>
+                                <span class="font-bold text-red-600">${fees.remaining.toLocaleString()} ريال</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-bold text-green-800 mb-4">نسبة السداد</h4>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-green-600 mb-2">${paymentRate}%</div>
+                            <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
+                                <div class="bg-green-500 h-4 rounded-full" style="width: ${paymentRate}%"></div>
+                            </div>
+                            <p class="text-sm text-gray-600">تم سداد ${paymentRate}% من إجمالي الرسوم</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <h4 class="font-bold text-yellow-800 mb-2">📋 معلومات مهمة:</h4>
+                    <ul class="text-sm text-yellow-700 space-y-1">
+                        <li>• يمكن سداد الرسوم على أقساط شهرية</li>
+                        <li>• للاستفسار عن الرسوم تواصل مع الإدارة المالية</li>
+                        <li>• آخر موعد لسداد الرسوم: نهاية كل شهر</li>
+                    </ul>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        function showActivities() {
+            const content = document.getElementById('studentContent');
+            
+            const html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">🎉 الأنشطة المدرسية</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="h-48 bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+                            <span class="text-6xl text-white">🏆</span>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">مسابقة الرياضيات</h4>
+                            <p class="text-sm text-gray-600 mb-3">حصلت على المركز الأول في مسابقة الرياضيات على مستوى المدرسة</p>
+                            <span class="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded">ديسمبر 2023</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="h-48 bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
+                            <span class="text-6xl text-white">🎨</span>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">معرض الفنون</h4>
+                            <p class="text-sm text-gray-600 mb-3">مشاركة في معرض الفنون السنوي بلوحة فنية مميزة</p>
+                            <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">نوفمبر 2023</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="h-48 bg-gradient-to-r from-orange-400 to-red-500 flex items-center justify-center">
+                            <span class="text-6xl text-white">⚽</span>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">بطولة كرة القدم</h4>
+                            <p class="text-sm text-gray-600 mb-3">عضو في فريق المدرسة الفائز ببطولة كرة القدم</p>
+                            <span class="text-xs text-orange-600 bg-orange-100 px-2 py-1 rounded">يناير 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <div class="h-48 bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center">
+                            <span class="text-6xl text-white">📚</span>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">مسابقة القراءة</h4>
+                            <p class="text-sm text-gray-600 mb-3">مشاركة فعالة في مسابقة القراءة الشهرية</p>
+                            <span class="text-xs text-purple-600 bg-purple-100 px-2 py-1 rounded">أكتوبر 2023</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <p class="text-gray-600">سيتم تحديث الأنشطة الجديدة بانتظام من قبل إدارة المدرسة</p>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        function showNotifications() {
+            const content = document.getElementById('studentContent');
+            const notifications = currentUser.notifications;
+            
+            let html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">🔔 الإشعارات</h3>
+                </div>
+                
+                <div class="space-y-4">
+            `;
+            
+            notifications.forEach(notification => {
+                const typeClass = notification.type === 'تهنئة' ? 'border-green-200 bg-green-50' : 
+                                 notification.type === 'تنبيه' ? 'border-yellow-200 bg-yellow-50' : 
+                                 'border-blue-200 bg-blue-50';
+                const typeIcon = notification.type === 'تهنئة' ? '🎉' : 
+                                notification.type === 'تنبيه' ? '⚠️' : '📢';
+                
+                html += `
+                    <div class="border ${typeClass} rounded-lg p-4">
+                        <div class="flex items-start space-x-3 space-x-reverse">
+                            <span class="text-2xl">${typeIcon}</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="font-semibold text-gray-800">${notification.type}</span>
+                                    <span class="text-xs text-gray-500">${notification.date}</span>
+                                </div>
+                                <p class="text-gray-700">${notification.message}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                </div>
+                
+                <div class="mt-6 p-4 bg-gray-50 rounded-lg text-center">
+                    <p class="text-gray-600">لا توجد إشعارات جديدة</p>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        function showContact() {
+            const content = document.getElementById('studentContent');
+            
+            const html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">📞 التواصل مع المدرسة</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-bold text-blue-800 mb-4">معلومات الاتصال</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3 space-x-reverse">
+                                <span class="text-2xl">📞</span>
+                                <div>
+                                    <p class="font-semibold">الهاتف الأرضي</p>
+                                    <p class="text-blue-600">04420927</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 space-x-reverse">
+                                <span class="text-2xl">📱</span>
+                                <div>
+                                    <p class="font-semibold">الهواتف المحمولة</p>
+                                    <p class="text-blue-600">779492227 – 714442137</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 space-x-reverse">
+                                <span class="text-2xl">📧</span>
+                                <div>
+                                    <p class="font-semibold">البريد الإلكتروني</p>
+                                    <p class="text-blue-600">alhimmaschools@</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 space-x-reverse">
+                                <span class="text-2xl">🏫</span>
+                                <div>
+                                    <p class="font-semibold">العنوان</p>
+                                    <p class="text-blue-600">اليمن – إب – المشنة – دار القدسي</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-bold text-green-800 mb-4">وسائل التواصل الاجتماعي</h4>
+                        <div class="space-y-4">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3 space-x-reverse p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                <span class="text-2xl">📘</span>
+                                <span class="font-semibold">Facebook</span>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3 space-x-reverse p-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors">
+                                <span class="text-2xl">📷</span>
+                                <span class="font-semibold">Instagram</span>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3 space-x-reverse p-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                                <span class="text-2xl">💬</span>
+                                <span class="font-semibold">WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <h4 class="font-bold text-yellow-800 mb-2">⏰ أوقات العمل:</h4>
+                    <p class="text-yellow-700">السبت - الخميس: 7:00 ص - 2:00 م</p>
+                    <p class="text-yellow-700">الجمعة: مغلق</p>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        // Admin Dashboard Functions
+        function showStudentManagement() {
+            const content = document.getElementById('adminContent');
+            
+            let studentsTableRows = '';
+            Object.keys(studentsData).forEach(key => {
+                const student = studentsData[key];
+                studentsTableRows += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="border border-gray-300 px-4 py-3">${student.name}</td>
+                        <td class="border border-gray-300 px-4 py-3 text-center">${student.grade}</td>
+                        <td class="border border-gray-300 px-4 py-3 text-center">${student.id}</td>
+                        <td class="border border-gray-300 px-4 py-3 text-center">${student.username}</td>
+                        <td class="border border-gray-300 px-4 py-3 text-center">
+                            <button onclick="editStudent('${key}')" class="text-blue-600 hover:text-blue-800 mx-1 px-2 py-1 rounded">تعديل</button>
+                            <button onclick="deleteStudent('${key}')" class="text-red-600 hover:text-red-800 mx-1 px-2 py-1 rounded">حذف</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            const html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">👥 إدارة الطلاب</h3>
+                    <button onclick="showAddStudentForm()" class="btn-primary text-white px-4 py-2 rounded-lg">
+                        إضافة طالب جديد
+                    </button>
+                </div>
+                
+                <div id="studentFormContainer" class="hidden mb-6">
+                    <!-- Student form will be inserted here -->
+                </div>
+                
+                <div class="table-container">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50">
+                                <th class="border border-gray-300 px-4 py-3 text-right font-bold">الاسم</th>
+                                <th class="border border-gray-300 px-4 py-3 text-center font-bold">الصف</th>
+                                <th class="border border-gray-300 px-4 py-3 text-center font-bold">رقم الطالب</th>
+                                <th class="border border-gray-300 px-4 py-3 text-center font-bold">اسم المستخدم</th>
+                                <th class="border border-gray-300 px-4 py-3 text-center font-bold">الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            ${studentsTableRows}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        function showGradeManagement() {
+            const content = document.getElementById('adminContent');
+            
+            let studentOptions = '';
+            Object.keys(studentsData).forEach(key => {
+                const student = studentsData[key];
+                const selected = selectedStudentForGrades === key ? 'selected' : '';
+                studentOptions += `<option value="${key}" ${selected}>${student.name} - ${student.id}</option>`;
+            });
+            
+            // Get current grades if student is selected
+            let currentGrades = {};
+            if (selectedStudentForGrades && studentsData[selectedStudentForGrades]) {
+                currentGrades = studentsData[selectedStudentForGrades].grades[selectedMonth] || {};
+            }
+            
+            const html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">📝 إدارة العلامات</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">اختر الطالب</label>
+                        <select id="gradeStudentSelect" onchange="updateGradeStudent()" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">-- اختر الطالب --</option>
+                            ${studentOptions}
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">اختر الشهر</label>
+                        <select id="gradeMonthSelect" onchange="updateGradeMonth()" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="نوفمبر" ${selectedMonth === 'نوفمبر' ? 'selected' : ''}>نوفمبر</option>
+                            <option value="ديسمبر" ${selectedMonth === 'ديسمبر' ? 'selected' : ''}>ديسمبر</option>
+                            <option value="يناير" ${selectedMonth === 'يناير' ? 'selected' : ''}>يناير</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-4">إدخال الدرجات</h4>
+                    <form id="gradesForm" onsubmit="saveGrades(event)">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">القرآن الكريم</label>
+                                <input type="number" name="القرآن" min="0" max="100" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="${currentGrades['القرآن'] || ''}">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">التربية الإسلامية</label>
+                                <input type="number" name="الإسلامية" min="0" max="100" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="${currentGrades['الإسلامية'] || ''}">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">اللغة العربية</label>
+                                <input type="number" name="اللغة العربية" min="0" max="100" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="${currentGrades['اللغة العربية'] || ''}">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">اللغة الإنجليزية</label>
+                                <input type="number" name="اللغة الإنجليزية" min="0" max="100" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="${currentGrades['اللغة الإنجليزية'] || ''}">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">الرياضيات</label>
+                                <input type="number" name="الرياضيات" min="0" max="100" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="${currentGrades['الرياضيات'] || ''}">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">العلوم</label>
+                                <input type="number" name="العلوم" min="0" max="100" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="${currentGrades['العلوم'] || ''}">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">الاجتماعيات</label>
+                                <input type="number" name="الاجتماعيات" min="0" max="100" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="${currentGrades['الاجتماعيات'] || ''}">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">الحاسوب</label>
+                                <input type="number" name="الحاسوب" min="0" max="100" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="${currentGrades['الحاسوب'] || ''}">
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <button type="submit" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold" ${!selectedStudentForGrades ? 'disabled' : ''}>
+                                حفظ الدرجات
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        function showAttendanceManagement() {
+            const content = document.getElementById('adminContent');
+            
+            const html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">📋 إدارة الحضور والغياب</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">اختر الطالب</label>
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>أحمد محمد علي - 2024001</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">التاريخ</label>
+                        <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">الحالة</label>
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>حاضر</option>
+                            <option>غائب</option>
+                            <option>غياب مبرر</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <button onclick="saveAttendance()" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+                        حفظ الحضور
+                    </button>
+                </div>
+                
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-4">سجل الحضور الأخير</h4>
+                    <div class="table-container">
+                        <table class="w-full border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="border border-gray-300 px-4 py-3 text-right font-bold">الطالب</th>
+                                    <th class="border border-gray-300 px-4 py-3 text-center font-bold">التاريخ</th>
+                                    <th class="border border-gray-300 px-4 py-3 text-center font-bold">الحالة</th>
+                                    <th class="border border-gray-300 px-4 py-3 text-center font-bold">الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="border border-gray-300 px-4 py-3">أحمد محمد علي</td>
+                                    <td class="border border-gray-300 px-4 py-3 text-center">2024-01-20</td>
+                                    <td class="border border-gray-300 px-4 py-3 text-center">
+                                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">حاضر</span>
+                                    </td>
+                                    <td class="border border-gray-300 px-4 py-3 text-center">
+                                        <button class="text-blue-600 hover:text-blue-800">تعديل</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        function showFeesManagement() {
+            const content = document.getElementById('adminContent');
+            
+            const html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">💳 إدارة الرسوم الدراسية</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">اختر الطالب</label>
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>أحمد محمد علي - 2024001</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">نوع العملية</label>
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>دفعة جديدة</option>
+                            <option>تعديل المبلغ الإجمالي</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-4">الرسوم الحالية</h4>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="text-center p-4 bg-blue-50 rounded-lg">
+                            <p class="text-sm text-gray-600">إجمالي الرسوم</p>
+                            <p class="text-2xl font-bold text-blue-600">50,000 ريال</p>
+                        </div>
+                        <div class="text-center p-4 bg-green-50 rounded-lg">
+                            <p class="text-sm text-gray-600">المبلغ المدفوع</p>
+                            <p class="text-2xl font-bold text-green-600">30,000 ريال</p>
+                        </div>
+                        <div class="text-center p-4 bg-red-50 rounded-lg">
+                            <p class="text-sm text-gray-600">المبلغ المتبقي</p>
+                            <p class="text-2xl font-bold text-red-600">20,000 ريال</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">المبلغ المدفوع الجديد</label>
+                            <input type="number" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="أدخل المبلغ">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">تاريخ الدفع</label>
+                            <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <button onclick="saveFees()" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+                            حفظ التحديث
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        function showActivityManagement() {
+            const content = document.getElementById('adminContent');
+            
+            let activitiesHtml = '';
+            activitiesData.forEach(activity => {
+                const colorClass = activity.date.includes('ديسمبر') ? 'blue' : 
+                                 activity.date.includes('نوفمبر') ? 'green' : 
+                                 activity.date.includes('يناير') ? 'orange' : 'purple';
+                
+                activitiesHtml += `
+                    <div class="bg-white border border-gray-200 rounded-lg p-4">
+                        <div class="h-32 bg-gradient-to-r ${activity.gradient} rounded-lg mb-4 flex items-center justify-center">
+                            <span class="text-4xl text-white">${activity.icon}</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">${activity.title}</h4>
+                        <p class="text-sm text-gray-600 mb-3">${activity.description}</p>
+                        <div class="flex justify-between">
+                            <span class="text-xs text-${colorClass}-600 bg-${colorClass}-100 px-2 py-1 rounded">${activity.date}</span>
+                            <div>
+                                <button onclick="editActivity(${activity.id})" class="text-blue-600 hover:text-blue-800 text-sm mx-1 px-2 py-1 rounded">تعديل</button>
+                                <button onclick="deleteActivity(${activity.id})" class="text-red-600 hover:text-red-800 text-sm mx-1 px-2 py-1 rounded">حذف</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            const html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">🎨 إدارة الأنشطة</h3>
+                    <button onclick="showAddActivityForm()" class="btn-primary text-white px-4 py-2 rounded-lg">
+                        إضافة نشاط جديد
+                    </button>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    ${activitiesHtml}
+                </div>
+                
+                ${activitiesData.length === 0 ? `
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">🎨</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">لا توجد أنشطة</h3>
+                        <p class="text-gray-600">ابدأ بإضافة نشاط جديد</p>
+                    </div>
+                ` : ''}
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        function showNotificationManagement() {
+            const content = document.getElementById('adminContent');
+            
+            const html = `
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">📢 إدارة الإشعارات</h3>
+                </div>
+                
+                <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-4">إرسال إشعار جديد</h4>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">نوع الإشعار</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>إشعار عام</option>
+                                <option>إشعار خاص</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">تصنيف الإشعار</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>تنبيه</option>
+                                <option>تهنئة</option>
+                                <option>تنويه دراسي</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">الطالب المستهدف (للإشعار الخاص)</label>
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>جميع الطلاب</option>
+                            <option>أحمد محمد علي - 2024001</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">نص الإشعار</label>
+                        <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-24" placeholder="اكتب نص الإشعار هنا..."></textarea>
+                    </div>
+                    
+                    <button onclick="sendNotification()" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+                        إرسال الإشعار
+                    </button>
+                </div>
+                
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-4">الإشعارات المرسلة مؤخراً</h4>
+                    <div class="space-y-3">
+                        <div class="border border-gray-200 rounded-lg p-3">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="font-semibold text-yellow-600">تنبيه</span>
+                                <span class="text-xs text-gray-500">2024-01-20</span>
+                            </div>
+                            <p class="text-gray-700 text-sm">موعد الامتحان النهائي: 15 فبراير 2024</p>
+                            <p class="text-xs text-gray-500 mt-1">إلى: جميع الطلاب</p>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-3">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="font-semibold text-green-600">تهنئة</span>
+                                <span class="text-xs text-gray-500">2024-01-18</span>
+                            </div>
+                            <p class="text-gray-700 text-sm">تهانينا لحصولك على المركز الأول في مادة الحاسوب</p>
+                            <p class="text-xs text-gray-500 mt-1">إلى: أحمد محمد علي</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        // Helper functions for admin actions
+        function updateGradeStudent() {
+            selectedStudentForGrades = document.getElementById('gradeStudentSelect').value;
+            showGradeManagement(); // Refresh the form with new student data
+        }
+        
+        function updateGradeMonth() {
+            selectedMonth = document.getElementById('gradeMonthSelect').value;
+            showGradeManagement(); // Refresh the form with new month data
+        }
+        
+        function saveGrades(event) {
+            event.preventDefault();
+            
+            if (!selectedStudentForGrades) {
+                showNotification('يرجى اختيار طالب أولاً', 'error');
+                return;
+            }
+            
+            const formData = new FormData(event.target);
+            const grades = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (value) {
+                    grades[key] = parseInt(value);
+                }
+            }
+            
+            // Initialize grades structure if it doesn't exist
+            if (!studentsData[selectedStudentForGrades].grades) {
+                studentsData[selectedStudentForGrades].grades = {};
+            }
+            if (!studentsData[selectedStudentForGrades].grades[selectedMonth]) {
+                studentsData[selectedStudentForGrades].grades[selectedMonth] = {};
+            }
+            
+            // Update grades
+            Object.assign(studentsData[selectedStudentForGrades].grades[selectedMonth], grades);
+            
+            showNotification('تم حفظ الدرجات بنجاح');
+        }
+        
+        function saveAttendance() {
+            showNotification('تم حفظ الحضور بنجاح');
+        }
+        
+        function saveFees() {
+            showNotification('تم تحديث الرسوم بنجاح');
+        }
+        
+        function sendNotification() {
+            showNotification('تم إرسال الإشعار بنجاح');
+        }
+        
+        function showAddStudentForm() {
+            const container = document.getElementById('studentFormContainer');
+            const isHidden = container.classList.contains('hidden');
+            
+            if (isHidden) {
+                editingStudent = null; // Reset editing state
+                const formHtml = `
+                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                        <h4 class="text-lg font-bold text-gray-800 mb-4">إضافة طالب جديد</h4>
+                        <form id="studentForm" onsubmit="saveStudent(event)">
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">الاسم الكامل</label>
+                                    <input type="text" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">الصف الدراسي</label>
+                                    <select name="grade" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        <option value="">-- اختر الصف --</option>
+                                        <option value="الصف الأول الأساسي">الصف الأول الأساسي</option>
+                                        <option value="الصف الثاني الأساسي">الصف الثاني الأساسي</option>
+                                        <option value="الصف الثالث الأساسي">الصف الثالث الأساسي</option>
+                                        <option value="الصف الرابع الأساسي">الصف الرابع الأساسي</option>
+                                        <option value="الصف الخامس الأساسي">الصف الخامس الأساسي</option>
+                                        <option value="الصف السادس الأساسي">الصف السادس الأساسي</option>
+                                        <option value="الصف السابع الأساسي">الصف السابع الأساسي</option>
+                                        <option value="الصف الثامن الأساسي">الصف الثامن الأساسي</option>
+                                        <option value="الصف التاسع الأساسي">الصف التاسع الأساسي</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">رقم الطالب</label>
+                                    <input type="text" name="id" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">اسم المستخدم</label>
+                                    <input type="text" name="username" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">كلمة المرور</label>
+                                    <input type="password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">إجمالي الرسوم</label>
+                                    <input type="number" name="totalFees" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="50000">
+                                </div>
+                            </div>
+                            <div class="flex space-x-4 space-x-reverse">
+                                <button type="submit" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+                                    حفظ الطالب
+                                </button>
+                                <button type="button" onclick="hideStudentForm()" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold">
+                                    إلغاء
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                `;
+                container.innerHTML = formHtml;
+                container.classList.remove('hidden');
+            } else {
+                hideStudentForm();
+            }
+        }
+        
+        function hideStudentForm() {
+            const container = document.getElementById('studentFormContainer');
+            container.classList.add('hidden');
+            editingStudent = null;
+        }
+        
+        function saveStudent(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const studentData = {};
+            
+            for (let [key, value] of formData.entries()) {
+                studentData[key] = value;
+            }
+            
+            // Check if username already exists (only for new students)
+            if (!editingStudent) {
+                const existingStudent = Object.values(studentsData).find(s => s.username === studentData.username);
+                if (existingStudent) {
+                    showNotification('اسم المستخدم موجود مسبقاً', 'error');
+                    return;
+                }
+            }
+            
+            const studentKey = editingStudent || `student${Date.now()}`;
+            
+            if (editingStudent) {
+                // Update existing student
+                Object.assign(studentsData[editingStudent], {
+                    name: studentData.name,
+                    grade: studentData.grade,
+                    id: studentData.id,
+                    username: studentData.username,
+                    password: studentData.password
+                });
+                
+                if (studentData.totalFees) {
+                    const currentPaid = studentsData[editingStudent].fees?.paid || 0;
+                    studentsData[editingStudent].fees = {
+                        total: parseInt(studentData.totalFees),
+                        paid: currentPaid,
+                        remaining: parseInt(studentData.totalFees) - currentPaid
+                    };
+                }
+                
+                showNotification('تم تحديث بيانات الطالب بنجاح');
+            } else {
+                // Add new student
+                studentsData[studentKey] = {
+                    name: studentData.name,
+                    grade: studentData.grade,
+                    id: studentData.id,
+                    username: studentData.username,
+                    password: studentData.password,
+                    grades: {
+                        'نوفمبر': {},
+                        'ديسمبر': {},
+                        'يناير': {}
+                    },
+                    attendance: generateAttendanceData(),
+                    fees: {
+                        total: parseInt(studentData.totalFees) || 50000,
+                        paid: 0,
+                        remaining: parseInt(studentData.totalFees) || 50000
+                    },
+                    notifications: []
+                };
+                
+                showNotification('تم إضافة الطالب بنجاح');
+            }
+            
+            hideStudentForm();
+            showStudentManagement(); // Refresh the table
+        }
+        
+        function editStudent(studentKey) {
+            const student = studentsData[studentKey];
+            if (!student) return;
+            
+            editingStudent = studentKey;
+            
+            const container = document.getElementById('studentFormContainer');
+            const formHtml = `
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-4">تعديل بيانات الطالب</h4>
+                    <form id="studentForm" onsubmit="saveStudent(event)">
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">الاسم الكامل</label>
+                                <input type="text" name="name" value="${student.name}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">الصف الدراسي</label>
+                                <select name="grade" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                    <option value="">-- اختر الصف --</option>
+                                    <option value="الصف الأول الأساسي" ${student.grade === 'الصف الأول الأساسي' ? 'selected' : ''}>الصف الأول الأساسي</option>
+                                    <option value="الصف الثاني الأساسي" ${student.grade === 'الصف الثاني الأساسي' ? 'selected' : ''}>الصف الثاني الأساسي</option>
+                                    <option value="الصف الثالث الأساسي" ${student.grade === 'الصف الثالث الأساسي' ? 'selected' : ''}>الصف الثالث الأساسي</option>
+                                    <option value="الصف الرابع الأساسي" ${student.grade === 'الصف الرابع الأساسي' ? 'selected' : ''}>الصف الرابع الأساسي</option>
+                                    <option value="الصف الخامس الأساسي" ${student.grade === 'الصف الخامس الأساسي' ? 'selected' : ''}>الصف الخامس الأساسي</option>
+                                    <option value="الصف السادس الأساسي" ${student.grade === 'الصف السادس الأساسي' ? 'selected' : ''}>الصف السادس الأساسي</option>
+                                    <option value="الصف السابع الأساسي" ${student.grade === 'الصف السابع الأساسي' ? 'selected' : ''}>الصف السابع الأساسي</option>
+                                    <option value="الصف الثامن الأساسي" ${student.grade === 'الصف الثامن الأساسي' ? 'selected' : ''}>الصف الثامن الأساسي</option>
+                                    <option value="الصف التاسع الأساسي" ${student.grade === 'الصف التاسع الأساسي' ? 'selected' : ''}>الصف التاسع الأساسي</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">رقم الطالب</label>
+                                <input type="text" name="id" value="${student.id}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">اسم المستخدم</label>
+                                <input type="text" name="username" value="${student.username}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">كلمة المرور</label>
+                                <input type="password" name="password" value="${student.password}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">إجمالي الرسوم</label>
+                                <input type="number" name="totalFees" value="${student.fees?.total || 50000}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+                        <div class="flex space-x-4 space-x-reverse">
+                            <button type="submit" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+                                حفظ التعديلات
+                            </button>
+                            <button type="button" onclick="hideStudentForm()" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold">
+                                إلغاء
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            container.innerHTML = formHtml;
+            container.classList.remove('hidden');
+        }
+        
+        function deleteStudent(studentKey) {
+            const student = studentsData[studentKey];
+            if (!student) return;
+            
+            // Create custom confirmation modal
+            const confirmModal = document.createElement('div');
+            confirmModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            confirmModal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-md mx-4">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">تأكيد الحذف</h3>
+                    <p class="text-gray-600 mb-6">هل أنت متأكد من حذف الطالب "${student.name}"؟ لا يمكن التراجع عن هذا الإجراء.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <button onclick="confirmDeleteStudent('${studentKey}')" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold">
+                            حذف
+                        </button>
+                        <button onclick="cancelDeleteStudent()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold">
+                            إلغاء
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(confirmModal);
+        }
+        
+        function confirmDeleteStudent(studentKey) {
+            delete studentsData[studentKey];
+            showNotification('تم حذف الطالب بنجاح');
+            cancelDeleteStudent();
+            showStudentManagement(); // Refresh the table
+        }
+        
+        function cancelDeleteStudent() {
+            const modal = document.querySelector('.fixed.inset-0');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+        
+        function showAddActivityForm() {
+            // Create custom modal for adding activity
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-md mx-4 w-full">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">إضافة نشاط جديد</h3>
+                    <form onsubmit="saveActivity(event)">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-semibold mb-2">عنوان النشاط</label>
+                            <input type="text" name="title" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-semibold mb-2">وصف النشاط</label>
+                            <textarea name="description" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-20" required></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-semibold mb-2">التاريخ</label>
+                            <input type="text" name="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="مثال: يناير 2024" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-semibold mb-2">الرمز التعبيري</label>
+                            <select name="icon" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="🏆">🏆 مسابقة</option>
+                                <option value="🎨">🎨 فنون</option>
+                                <option value="⚽">⚽ رياضة</option>
+                                <option value="📚">📚 قراءة</option>
+                                <option value="🎭">🎭 مسرح</option>
+                                <option value="🔬">🔬 علوم</option>
+                                <option value="🎵">🎵 موسيقى</option>
+                                <option value="💻">💻 تقنية</option>
+                            </select>
+                        </div>
+                        <div class="flex space-x-4 space-x-reverse">
+                            <button type="submit" class="btn-primary text-white px-4 py-2 rounded-lg font-semibold">
+                                حفظ النشاط
+                            </button>
+                            <button type="button" onclick="closeActivityModal()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold">
+                                إلغاء
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        function saveActivity(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const activityData = {};
+            
+            for (let [key, value] of formData.entries()) {
+                activityData[key] = value;
+            }
+            
+            const gradients = [
+                'from-blue-400 to-purple-500',
+                'from-green-400 to-blue-500',
+                'from-orange-400 to-red-500',
+                'from-purple-400 to-pink-500',
+                'from-yellow-400 to-orange-500',
+                'from-indigo-400 to-purple-500'
+            ];
+            
+            const newActivity = {
+                id: Date.now(),
+                title: activityData.title,
+                description: activityData.description,
+                date: activityData.date,
+                icon: activityData.icon,
+                gradient: gradients[Math.floor(Math.random() * gradients.length)]
+            };
+            
+            activitiesData.push(newActivity);
+            
+            showNotification('تم إضافة النشاط بنجاح');
+            closeActivityModal();
+            showActivityManagement(); // Refresh the activities display
+        }
+        
+        function closeActivityModal() {
+            const modal = document.querySelector('.fixed.inset-0');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+        
+        function editActivity(activityId) {
+            const activity = activitiesData.find(a => a.id === activityId);
+            if (!activity) return;
+            
+            // Create custom modal for editing activity
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-md mx-4 w-full">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">تعديل النشاط</h3>
+                    <form onsubmit="updateActivity(event, ${activityId})">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-semibold mb-2">عنوان النشاط</label>
+                            <input type="text" name="title" value="${activity.title}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-semibold mb-2">وصف النشاط</label>
+                            <textarea name="description" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-20" required>${activity.description}</textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-semibold mb-2">التاريخ</label>
+                            <input type="text" name="date" value="${activity.date}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-semibold mb-2">الرمز التعبيري</label>
+                            <select name="icon" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="🏆" ${activity.icon === '🏆' ? 'selected' : ''}>🏆 مسابقة</option>
+                                <option value="🎨" ${activity.icon === '🎨' ? 'selected' : ''}>🎨 فنون</option>
+                                <option value="⚽" ${activity.icon === '⚽' ? 'selected' : ''}>⚽ رياضة</option>
+                                <option value="📚" ${activity.icon === '📚' ? 'selected' : ''}>📚 قراءة</option>
+                                <option value="🎭" ${activity.icon === '🎭' ? 'selected' : ''}>🎭 مسرح</option>
+                                <option value="🔬" ${activity.icon === '🔬' ? 'selected' : ''}>🔬 علوم</option>
+                                <option value="🎵" ${activity.icon === '🎵' ? 'selected' : ''}>🎵 موسيقى</option>
+                                <option value="💻" ${activity.icon === '💻' ? 'selected' : ''}>💻 تقنية</option>
+                            </select>
+                        </div>
+                        <div class="flex space-x-4 space-x-reverse">
+                            <button type="submit" class="btn-primary text-white px-4 py-2 rounded-lg font-semibold">
+                                حفظ التعديلات
+                            </button>
+                            <button type="button" onclick="closeActivityModal()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold">
+                                إلغاء
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+        
+        function updateActivity(event, activityId) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const activityData = {};
+            
+            for (let [key, value] of formData.entries()) {
+                activityData[key] = value;
+            }
+            
+            const activityIndex = activitiesData.findIndex(a => a.id === activityId);
+            if (activityIndex > -1) {
+                Object.assign(activitiesData[activityIndex], {
+                    title: activityData.title,
+                    description: activityData.description,
+                    date: activityData.date,
+                    icon: activityData.icon
+                });
+                
+                showNotification('تم تحديث النشاط بنجاح');
+                closeActivityModal();
+                showActivityManagement(); // Refresh the activities display
+            }
+        }
+        
+        function deleteActivity(activityId) {
+            const activity = activitiesData.find(a => a.id === activityId);
+            if (!activity) return;
+            
+            // Create custom confirmation modal
+            const confirmModal = document.createElement('div');
+            confirmModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            confirmModal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-md mx-4">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">تأكيد الحذف</h3>
+                    <p class="text-gray-600 mb-6">هل أنت متأكد من حذف النشاط "${activity.title}"؟ لا يمكن التراجع عن هذا الإجراء.</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <button onclick="confirmDeleteActivity(${activityId})" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold">
+                            حذف
+                        </button>
+                        <button onclick="closeActivityModal()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold">
+                            إلغاء
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(confirmModal);
+        }
+        
+        function confirmDeleteActivity(activityId) {
+            const activityIndex = activitiesData.findIndex(a => a.id === activityId);
+            if (activityIndex > -1) {
+                activitiesData.splice(activityIndex, 1);
+                showNotification('تم حذف النشاط بنجاح');
+                closeActivityModal();
+                showActivityManagement(); // Refresh the activities display
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'991bd9b6e589a0b7',t:'MTc2MDk5ODI4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
